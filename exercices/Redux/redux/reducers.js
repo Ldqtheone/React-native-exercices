@@ -3,7 +3,14 @@ const initialState = {
 };
 
 function todoReducer(state = initialState, action) {
-  return {...state, todoList: action.todoList};
+  switch (action.type) {
+    case 'ADD_TODO':
+      return {...state, todoList: action.todoList};
+    case 'REMOVE_TODO':
+      return {...state, todoList: action.todoList};
+    default:
+      return state;
+  }
 }
 
 export default todoReducer;

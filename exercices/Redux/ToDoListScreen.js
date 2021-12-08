@@ -13,7 +13,7 @@ import ToDoListItem from './ToDoListItem';
 import {todoActions} from './redux/actions';
 import {useDispatch, useSelector} from 'react-redux';
 
-const ToDoListScreen = () => {
+const ToDoListScreen = ({navigation}) => {
   const [searchValue, setSearchValue] = useState('');
   const [toDoInput, setToDoInput] = useState('');
   const dispatch = useDispatch();
@@ -24,7 +24,11 @@ const ToDoListScreen = () => {
   const renderFlatList = (item, index) => {
     return (
       <View key={index}>
-        <ToDoListItem data={item} deleteToDo={deleteToDo} />
+        <ToDoListItem
+          navigation={navigation}
+          data={item}
+          deleteToDo={deleteToDo}
+        />
       </View>
     );
   };
@@ -33,6 +37,7 @@ const ToDoListScreen = () => {
     item => {
       dispatch(
         todoActions({
+          type: 'REMOVE_TODO',
           todo: toDoList.filter(v => v.title !== item.item.title),
         }),
       );
@@ -51,6 +56,7 @@ const ToDoListScreen = () => {
   const addToDo = useCallback(() => {
     dispatch(
       todoActions({
+        type: 'ADD_TODO',
         todo: [...toDoList, {title: toDoInput}],
       }),
     );
