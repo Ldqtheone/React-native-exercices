@@ -1,8 +1,4 @@
-export const ADD_TODO = 'ADD_TODO';
-export const REMOVE_TODO = 'REMOVE_TODO';
-
 export const todoActions = params => {
-  console.log('Params : ', params);
   try {
     return async dispatch => {
       if (params) {

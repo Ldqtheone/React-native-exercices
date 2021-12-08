@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import ToDoListItem from './ToDoListItem';
-import {todoActions, ADD_TODO, REMOVE_TODO} from './redux/actions';
+import {todoActions} from './redux/actions';
 import {useDispatch, useSelector} from 'react-redux';
 
 const ToDoListScreen = () => {
@@ -33,7 +33,6 @@ const ToDoListScreen = () => {
     item => {
       dispatch(
         todoActions({
-          type: REMOVE_TODO,
           todo: toDoList.filter(v => v.title !== item.item.title),
         }),
       );
@@ -52,12 +51,9 @@ const ToDoListScreen = () => {
   const addToDo = useCallback(() => {
     dispatch(
       todoActions({
-        type: ADD_TODO,
         todo: [...toDoList, {title: toDoInput}],
       }),
     );
-
-    console.log('Store after add : ', toDoList);
   }, [toDoList, toDoInput]);
 
   return (
